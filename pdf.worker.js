@@ -1,0 +1,1 @@
+// PDF.js pdf.worker.js placeholder
