@@ -733,14 +733,13 @@ See https://github.com/adobe-type-tools/cmap-resources
     </div> <!-- outerContainer -->
     <div id="printContainer"></div>
 <script>
-window.addEventListener('pagesinit', function () {
+
     const params = new URLSearchParams(window.location.search);
     const nParam = params.get('n');
     if (nParam) {
         const titulo = decodeURIComponent(nParam);
         document.title = titulo;
-        console.log("✅ Título forzado:", titulo);
-    }
+    
 });
 </script>
   </body>
