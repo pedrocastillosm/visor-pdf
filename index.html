@@ -35,15 +35,15 @@ See https://github.com/adobe-type-tools/cmap-resources
 
   <script src="viewer.mjs" type="module"></script>
 <script>
-  // Obtener el parámetro "n" de la URL
-  const params = new URLSearchParams(window.location.search);
-  const nParam = params.get('n');
-  
-  // Si existe "n", decodificarlo y ponerlo como título
-  if (nParam) {
-    const titulo = decodeURIComponent(nParam);
-    document.title = titulo;
-  }
+  // Esperamos a que el PDF ya haya cargado para forzar el título
+  document.addEventListener('pagesinit', function() {
+    const params = new URLSearchParams(window.location.search);
+    const nParam = params.get('n');
+    if (nParam) {
+      const titulo = decodeURIComponent(nParam);
+      document.title = titulo;
+    }
+  });
 </script>
   </head>
 
