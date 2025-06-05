@@ -733,7 +733,7 @@ See https://github.com/adobe-type-tools/cmap-resources
     </div> <!-- outerContainer -->
     <div id="printContainer"></div>
 <script>
-document.addEventListener("documentload", function () {
+window.addEventListener('pagesinit', function () {
     const params = new URLSearchParams(window.location.search);
     const nParam = params.get('n');
     if (nParam) {
