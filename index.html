@@ -35,15 +35,24 @@ See https://github.com/adobe-type-tools/cmap-resources
 
   <script src="viewer.mjs" type="module"></script>
 <script>
-  // Esperamos a que el PDF ya haya cargado para forzar el título
-  document.addEventListener('pagesinit', function() {
+  function forzarTitulo() {
     const params = new URLSearchParams(window.location.search);
     const nParam = params.get('n');
     if (nParam) {
       const titulo = decodeURIComponent(nParam);
       document.title = titulo;
     }
-  });
+  }
+
+  // Al inicio
+  forzarTitulo();
+
+  // Al cargar las páginas del PDF
+  document.addEventListener('pagesinit', forzarTitulo);
+
+  // Cada vez que el título cambie por PDF.js
+  const observer = new MutationObserver(forzarTitulo);
+  observer.observe(document.querySelector('title'), { childList: true });
 </script>
   </head>
 
