@@ -34,6 +34,25 @@ See https://github.com/adobe-type-tools/cmap-resources
     <link rel="stylesheet" href="viewer.css">
 
   <script src="viewer.mjs" type="module"></script>
+<script>
+    function getParam(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const nParam = getParam("n");
+        if (nParam) {
+            let decoded;
+            try {
+                decoded = atob(nParam.replace(/-/g, '+').replace(/_/g, '/').padEnd(nParam.length + (4 - nParam.length % 4) % 4, '='));
+            } catch {
+                decoded = nParam;
+            }
+            document.title = `Visor - ${decoded}`;
+        }
+    });
+</script>
   </head>
 
   <body tabindex="0">
