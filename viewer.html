@@ -733,13 +733,29 @@ See https://github.com/adobe-type-tools/cmap-resources
     </div> <!-- outerContainer -->
     <div id="printContainer"></div>
 <script>
-  const params = new URLSearchParams(window.location.search);
-  const nParam = params.get('n');
-  if (nParam) {
-      const titulo = decodeURIComponent(nParam);
-      document.title = titulo;
-      console.log("✅ Título forzado al final:", titulo);
-  }
-</script>
+
+// Obtener el título que quieres
+const params = new URLSearchParams(window.location.search);
+const nombreParam = params.get("n") ? decodeURIComponent(params.get("n")) : "Documento";
+const desiredTitle = `Reports | ${nombreParam}`;
+console.log("✅ Título deseado:", desiredTitle);
+
+// Observar cambios en el <title>
+const titleObserver = new MutationObserver(() => {
+    if (document.title !== desiredTitle) {
+        document.title = desiredTitle;
+        console.log("✅ Título forzado con observer:", desiredTitle);
+    }
+});
+
+// Iniciar el observer
+const titleElement = document.querySelector('title');
+if (titleElement) {
+    titleObserver.observe(titleElement, { childList: true });
+    // También poner el título inicialmente
+    document.title = desiredTitle;
+    console.log("✅ Observer activado");
+}
+
   </body>
 </html>
