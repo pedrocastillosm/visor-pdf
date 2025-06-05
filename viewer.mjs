@@ -2335,7 +2335,7 @@ class FluentResource {
       if (test(RE_UNICODE_ESCAPE)) {
         let [, codepoint4, codepoint6] = match(RE_UNICODE_ESCAPE);
         let codepoint = parseInt(codepoint4 || codepoint6, 16);
-        return codepoint <= 0xd7ff || 0xe000 <= codepoint ? String.fromCodePoint(codepoint) : "�";
+        return codepoint <= 0xd7ff || 0xe000 <= codepoint ? String.fromCodePoint(codepoint) : " ";
       }
       throw new SyntaxError("Unknown escape sequence");
     }
@@ -16219,22 +16219,9 @@ initCom(PDFViewerApplication);
 {
   const HOSTED_VIEWER_ORIGINS = new Set(["null", "http://mozilla.github.io", "https://mozilla.github.io"]);
   var validateFileURL = function (file) {
-    if (!file) {
+    
       return;
-    }
-    const viewerOrigin = URL.parse(window.location)?.origin || "null";
-    if (HOSTED_VIEWER_ORIGINS.has(viewerOrigin)) {
-      return;
-    }
-    const fileOrigin = URL.parse(file, window.location)?.origin;
-    if (fileOrigin === viewerOrigin) {
-      return;
-    }
-    const ex = new Error("file origin does not match viewer's");
-    PDFViewerApplication._documentError("pdfjs-loading-error", {
-      message: ex.message
-    });
-    throw ex;
+    
   };
   var onFileInputChange = function (evt) {
     if (this.pdfViewer?.isInPresentationMode) {
