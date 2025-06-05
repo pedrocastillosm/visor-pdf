@@ -734,28 +734,25 @@ See https://github.com/adobe-type-tools/cmap-resources
     <div id="printContainer"></div>
 <script>
 
-// Obtener el título que quieres
-const params = new URLSearchParams(window.location.search);
-const nombreParam = params.get("n") ? decodeURIComponent(params.get("n")) : "Documento";
-const desiredTitle = `Reports | ${nombreParam}`;
-console.log("✅ Título deseado:", desiredTitle);
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const nParam = params.get('n');
+  if (nParam) {
+      const titulo = decodeURIComponent(nParam);
+      console.log("✅ Título forzado al final:", titulo);
 
-// Observar cambios en el <title>
-const titleObserver = new MutationObserver(() => {
-    if (document.title !== desiredTitle) {
-        document.title = desiredTitle;
-        console.log("✅ Título forzado con observer:", desiredTitle);
-    }
-});
-
-// Iniciar el observer
-const titleElement = document.querySelector('title');
-if (titleElement) {
-    titleObserver.observe(titleElement, { childList: true });
-    // También poner el título inicialmente
-    document.title = desiredTitle;
-    console.log("✅ Observer activado");
-}
+      // Forzarlo cada 500 ms por 5 segundos
+      let counter = 0;
+      const interval = setInterval(() => {
+          document.title = titulo;
+          counter++;
+          if (counter >= 10) { // 10 * 500ms = 5 seg
+              clearInterval(interval);
+              console.log("✅ Título forzado terminado");
+          }
+      }, 500);
+  }
+</script>
 
   </body>
 </html>
