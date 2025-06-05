@@ -752,5 +752,15 @@ See https://github.com/adobe-type-tools/cmap-resources
 
     </div> <!-- outerContainer -->
     <div id="printContainer"></div>
+document.addEventListener("documentload", function () {
+    // Aquí es SEGURO cambiar el título, ya no te lo va a volver a tocar
+    const params = new URLSearchParams(window.location.search);
+    const nParam = params.get('n');
+    if (nParam) {
+        const titulo = decodeURIComponent(nParam);
+        document.title = titulo;
+        console.log("✅ Título forzado:", titulo);
+    }
+});
   </body>
 </html>
