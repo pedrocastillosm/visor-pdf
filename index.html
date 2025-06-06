@@ -26,6 +26,11 @@ See https://github.com/adobe-type-tools/cmap-resources
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="google" content="notranslate">
     <title>PDF.js viewer</title>
+    <!-- Meta Open Graph -->
+    <meta property="og:title" content="Visor de Documento" />
+    <meta property="og:description" content="Visualización de documentos PDF" />
+    <meta property="og:image" content="https://accesoexterno.blob.core.windows.net/mailer/LogoCuadrado300.png" />
+    <meta property="og:url" content="https://www.castilloasociados.cl" />
 
 <!-- This snippet is used in production (included from viewer.html) -->
 <link rel="resource" type="application/l10n" href="locale/locale.json">
@@ -54,6 +59,7 @@ See https://github.com/adobe-type-tools/cmap-resources
   const observer = new MutationObserver(forzarTitulo);
   observer.observe(document.querySelector('title'), { childList: true });
 </script>
+
   </head>
 
   <body tabindex="0">
